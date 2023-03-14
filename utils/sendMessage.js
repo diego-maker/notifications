@@ -1,23 +1,15 @@
 import axios from "axios";
 import { ChatGPTAPI } from "chatgpt";
 
-async function example(msg) {
-  const api = new ChatGPTAPI({
-    apiKey: process.env.OPENAI_API_KEY
-  })
 
-  const res = await api.sendMessage(msg)
-  return res.text
 
-}
+const send = async  (phone_number_id, from, msg_body, token) => {
 
-const sendMessage = (phone_number_id, from, msg_body, token) => {
+  const sliptMSG = msg_body.split(" ");
+  const countKeyMSG = sliptMSG.length;
 
-const sliptMSG = msg_body.split(" ");
-const countKeyMSG = sliptMSG.length;
-
-  if (countKeyMSG > 12 ) {
-   return axios({
+  if (countKeyMSG > 12) {
+    return axios({
       method: "POST",
       url:
         "https://graph.facebook.com/v12.0/" +
@@ -27,14 +19,19 @@ const countKeyMSG = sliptMSG.length;
       data: {
         messaging_product: "whatsapp",
         to: from,
-        text: { body: "A não essa mensagem é muito grande para eu processar por enquanto 😔, tente diminuir sua pergunta por gentileza"  },
+        text: { body: "A não essa mensagem é muito grande para eu processar por enquanto 😔, tente diminuir sua pergunta por gentileza" },
       },
       headers: { "Content-Type": "application/json" },
     });
   }
-  else{
+  else {
+    const api = new ChatGPTAPI({
+      apiKey: process.env.OPENAI_API_KEY
+    })
 
-  const valueText = example(msg_body)
+    const res = await api.sendMessage(msg)
+
+    const valueText = res.text
 
     return axios({
       method: "POST",
@@ -46,12 +43,12 @@ const countKeyMSG = sliptMSG.length;
       data: {
         messaging_product: "whatsapp",
         to: from,
-        text: { body: `Chatgpt🤖 \n ${valueText}`  },
+        text: { body: `Chatgpt🤖 \n ${valueText}` },
       },
       headers: { "Content-Type": "application/json" },
     });
   }
- 
+
 };
 
-export default sendMessage;
+export default send;
