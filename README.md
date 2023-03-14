@@ -1,6 +1,6 @@
 # notifications
 
-Projeto para trabalhar com webhooks no whatsApp
+Projeto para trabalhar com chatbot no whatsApp meta
 
 ## 🚀 Começando
 
