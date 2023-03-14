@@ -1,6 +1,6 @@
-const express = require("express");
+import express from 'express'
 const router = express.Router();
-const { sendMessage } = require("../utils/sendMessage");
+import  sendMessage  from '../utils/sendMessage.js';
 
 router.post("/", (req, res) => {
   let body = req.body;
@@ -44,4 +44,4 @@ router.get("/", (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

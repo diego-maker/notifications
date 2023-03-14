@@ -1,6 +1,6 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const webhookRouter = require("../routes/webhook");
+import express from "express";
+import bodyParser from "body-parser";
+import webhookRouter from "../routes/webhook.js";
 
 const app = express();
 

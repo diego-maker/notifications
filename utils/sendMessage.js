@@ -1,5 +1,5 @@
-const axios = require("axios").default;
-const { ChatGPTAPI } = require('chatgpt')
+import axios from "axios";
+import { ChatGPTAPI } from "chatgpt";
 
 async function example(msg) {
   const api = new ChatGPTAPI({
@@ -54,4 +54,4 @@ const countKeyMSG = sliptMSG.length;
  
 };
 
-module.exports = { sendMessage };
+export default sendMessage;
