@@ -29,7 +29,7 @@ const send = async  (phone_number_id, from, msg_body, token) => {
       apiKey: process.env.OPENAI_API_KEY
     })
 
-    const res = await api.sendMessage(msg)
+    const res = await api.sendMessage(msg_body)
 
     const valueText = res.text
 
