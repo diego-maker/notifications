@@ -3,7 +3,7 @@ import { ChatGPTAPI } from "chatgpt";
 
 
 
-const send = async  (phone_number_id, from, msg_body, token) => {
+const send = async (phone_number_id, from, msg_body, token) => {
 
   const sliptMSG = msg_body.split(" ");
   const countKeyMSG = sliptMSG.length;
@@ -19,34 +19,40 @@ const send = async  (phone_number_id, from, msg_body, token) => {
       data: {
         messaging_product: "whatsapp",
         to: from,
-        text: { body: "A não essa mensagem é muito grande para eu processar por enquanto 😔, tente diminuir sua pergunta por gentileza" },
+        text: { body: "Ah não! essa mensagem é muito grande para eu processar por enquanto 😔, tente diminuir sua pergunta por gentileza" },
       },
       headers: { "Content-Type": "application/json" },
     });
   }
   else {
-    const api = new ChatGPTAPI({
-      apiKey: process.env.OPENAI_API_KEY
-    })
 
-    const res = await api.sendMessage(msg_body)
+    try {
+      const api = new ChatGPTAPI({
+        apiKey: process.env.OPENAI_API_KEY
+      })
 
-    const valueText = res.text
+      const res = await api.sendMessage(msg_body)
 
-    return axios({
-      method: "POST",
-      url:
-        "https://graph.facebook.com/v12.0/" +
-        phone_number_id +
-        "/messages?access_token=" +
-        token,
-      data: {
-        messaging_product: "whatsapp",
-        to: from,
-        text: { body: `Chatgpt🤖 \n ${valueText}` },
-      },
-      headers: { "Content-Type": "application/json" },
-    });
+      const valueText = res.text
+
+      return axios({
+        method: "POST",
+        url:
+          "https://graph.facebook.com/v12.0/" +
+          phone_number_id +
+          "/messages?access_token=" +
+          token,
+        data: {
+          messaging_product: "whatsapp",
+          to: from,
+          text: { body: `Chatgpt🤖 \n ${valueText}` },
+        },
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
   }
 
 };
