@@ -5,8 +5,6 @@ import { ChatGPTAPI } from "chatgpt";
 
 const send = async (phone_number_id, from, msg_body, token) => {
 
-  console.log(phone_number_id)
-
   const sliptMSG = msg_body.split(" ");
   const countKeyMSG = sliptMSG.length;
 
