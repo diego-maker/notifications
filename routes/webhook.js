@@ -19,7 +19,12 @@ router.post("/", (req, res) => {
       let from = req.body.entry[0].changes[0].value.messages[0].from;
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body;
 
+      try {
       sendMessage(phone_number_id, from, msg_body, process.env.WHATSAPP_TOKEN);
+        
+      } catch (error) {
+        console.log(error)
+      }
     }
     res.sendStatus(200);
   } else {
