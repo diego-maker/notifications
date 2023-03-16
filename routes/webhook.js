@@ -5,8 +5,25 @@ import  sendMessage  from '../utils/sendMessage.js';
 router.post("/", (req, res) => {
   let body = req.body;
 
-  console.log(req)
-return
+  if (req.body.object) {
+    if (
+      req.body.entry &&
+      req.body.entry[0].changes &&
+      req.body.entry[0].changes[0] &&
+      req.body.entry[0].changes[0].value.messages &&
+      req.body.entry[0].changes[0].value.messages[0]
+    ) {
+      let phone_number_id =
+        req.body.entry[0].changes[0].value.metadata.phone_number_id;
+      let from = req.body.entry[0].changes[0].value.messages[0].from;
+      let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body;
+
+      sendMessage(phone_number_id, from, msg_body, process.env.WHATSAPP_TOKEN);
+    }
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 router.get("/", (req, res) => {
