@@ -28,7 +28,7 @@ depois de clonado no seu repositório rode:
 npm install ou yarn
 ```
 
-Para configurar o webhook da sua aplicação e testar, recomendo o **[render](https://render.com/))** uma plataforma unificada para criar e executar todos os seus aplicativos e sites com certificados TLS gratuitos
+Para configurar o webhook da sua aplicação e testar, recomendo o **[render](https://render.com/)** uma plataforma unificada para criar e executar todos os seus aplicativos e sites com certificados TLS gratuitos
 
 ## ⚙️ Executando os testes
 
