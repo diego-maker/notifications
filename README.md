@@ -31,4 +31,4 @@ npm install ou yarn
 
 ## ⚙️ Executando os testes
 
-crie um arquivo .env...
+crie um arquivo .env e adicione suas environment variables
