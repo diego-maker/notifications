@@ -5,8 +5,10 @@ import  sendMessage  from '../utils/sendMessage.js';
 router.post("/", (req, res) => {
   let body = req.body;
 
-
+console.log()
   if (req.body.object) {
+
+  console.log(req.body.object)
     if (
       req.body.entry &&
       req.body.entry[0].changes &&
