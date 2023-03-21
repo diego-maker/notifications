@@ -34,19 +34,22 @@ const send = async (phone_number_id, from, msg_body, token) => {
           phone_number_id +
           "/messages?access_token=" +
           token,
-          data: {
-            messaging_product: "whatsapp",
-            to: from,
-            message: {
-              attachment: {
-                type: "audio",
-                payload: {
-                  url: "https://notifations-transform.onrender.com/webhook"
-                }
+        data: {
+          messaging_product: "whatsapp",
+          to: from,
+          message: {
+            text: {
+              body: "Olá! Aqui está um arquivo de áudio para você:"
+            },
+            attachment: {
+              type: "audio",
+              payload: {
+                url: "https://notifations-transform.onrender.com/webhook"
               }
             }
-          },
-        headers: { "Content-Type": "application/json" },
+          }
+        },
+        headers: { "Content-Type": "application/json" }
       });
     } catch (error) {
       console.error(error);
