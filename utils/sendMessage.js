@@ -5,12 +5,11 @@ import { ChatGPTAPI } from "chatgpt";
 
 const send = async (phone_number_id, from, msg_body, token) => {
   console.log('---------------------------audio-------------------')
-  console.log(msg_body)
+  console.log(phone_number_id)
   const sliptMSG = msg_body.split(" ");
   const countKeyMSG = sliptMSG.length;
 
   if (countKeyMSG > 12) {
-    console.log(phone_number_id)
     return axios({
       method: "POST",
       url:
