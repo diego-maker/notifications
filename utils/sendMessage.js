@@ -28,13 +28,14 @@ const send = async (phone_number_id, from, msg_body, token) => {
     try {
      return axios({
       method: "POST",
-      url: "https://graph.facebook.com/v12.0/me/messages?access_token=" + token,
+      url: "https://graph.facebook.com/v12.0/" +
+      phone_number_id +
+      "/messages?access_token=" +
+      token,
       data: {
         messaging_type: "MESSAGE_TAG",
         tag: "PAIRING_UPDATE",
-        recipient: {
-          phone_number: phone_number_id
-        },
+       
         message: {
           attachment: {
             type: "audio",
