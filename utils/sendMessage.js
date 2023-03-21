@@ -27,27 +27,33 @@ const send = async (phone_number_id, from, msg_body, token) => {
   else if(msg_body.substring(0,6) == '/audio'){
     try {
      return axios({
-        method: "POST",
-        url: "https://graph.facebook.com/v12.0/me/messages?access_token=" + token,
-        data: {
-          messaging_type: "MESSAGE_TAG",
-          tag: "PAIRING_UPDATE",
-          recipient: {
-            phone_number: phone_number_id
-          },
-          message: {
-            attachment: {
-              type: "audio",
-              payload: {
-                url: "https://notifations-transform.onrender.com/webhook",
-                is_reusable: true
-              }
+      method: "POST",
+      url: "https://graph.facebook.com/v12.0/me/messages?access_token=" + token,
+      data: {
+        messaging_type: "MESSAGE_TAG",
+        tag: "PAIRING_UPDATE",
+        recipient: {
+          phone_number: phone_number_id
+        },
+        message: {
+          attachment: {
+            type: "audio",
+            payload: {
+              url: "https://notifations-transform.onrender.com/webhook",
+              is_reusable: true
             }
           }
-        },
-        headers: {
-          "Content-Type": "application/json"
         }
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
     } catch (error) {
       console.error(error);
