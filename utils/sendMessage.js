@@ -10,6 +10,7 @@ const send = async (phone_number_id, from, msg_body, token) => {
   const countKeyMSG = sliptMSG.length;
 
   if (countKeyMSG > 12) {
+    console.log(phone_number_id)
     return axios({
       method: "POST",
       url:
