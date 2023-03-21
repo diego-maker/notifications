@@ -26,40 +26,32 @@ const send = async (phone_number_id, from, msg_body, token) => {
   }
   else if(msg_body.substring(0,6) == '/audio'){
     try {
-     return axios({
-      method: "POST",
-      url: "https://graph.facebook.com/v12.0/" +
-      phone_number_id +
-      "/messages?access_token=" +
-      token,
-      data: {
-        messaging_type: "MESSAGE_TAG",
-        tag: "PAIRING_UPDATE",
-       
-        message: {
-          attachment: {
-            type: "audio",
-            payload: {
-              url: "https://notifations-transform.onrender.com/webhook",
-              is_reusable: true
+     
+      return axios({
+        method: "POST",
+        url:
+          "https://graph.facebook.com/v12.0/" +
+          phone_number_id +
+          "/messages?access_token=" +
+          token,
+          data: {
+            messaging_product: "whatsapp",
+            to: from,
+            message: {
+              attachment: {
+                type: "audio",
+                payload: {
+                  url: "https://notifations-transform.onrender.com/webhook"
+                }
+              }
             }
-          }
-        }
-      },
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
+          },
+        headers: { "Content-Type": "application/json" },
       });
     } catch (error) {
       console.error(error);
-      
     }
+
   }
   else {
 
