@@ -5,6 +5,7 @@ import { ChatGPTAPI } from "chatgpt";
 
 const send = async (phone_number_id, from, msg_body, token) => {
   console.log('---------------------------audio-------------------')
+  console.log(token)
   const sliptMSG = msg_body.split(" ");
   const countKeyMSG = sliptMSG.length;
 
@@ -24,38 +25,7 @@ const send = async (phone_number_id, from, msg_body, token) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-  else if(msg_body.substring(0,6) == '/audio'){
-    try {
-     
-      return axios({
-        method: "POST",
-        url:
-          "https://graph.facebook.com/v12.0/" +
-          phone_number_id +
-          "/messages?access_token=" +
-          token,
-        data: {
-          messaging_product: "whatsapp",
-          to: from,
-          message: {
-            text: {
-              body: "Olá! Aqui está um arquivo de áudio para você:"
-            },
-            attachment: {
-              type: "audio",
-              payload: {
-                url: "https://notifations-transform.onrender.com/webhook"
-              }
-            }
-          }
-        },
-        headers: { "Content-Type": "application/json" }
-      });
-    } catch (error) {
-      console.error(error);
-    }
 
-  }
   else {
 
     try {
